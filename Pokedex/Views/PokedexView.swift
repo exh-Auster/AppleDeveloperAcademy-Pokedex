@@ -26,6 +26,7 @@ struct PokedexView : View {
                         }
                     }
                 }
+                .padding()
                 //            .edgesIgnoringSafeArea(.horizontal)
             }
             .navigationTitle("Pokedex")
@@ -40,7 +41,16 @@ struct PokemonCardView: View {
     let pokemon: Pokemon
     
     var body: some View {
-        Text(pokemon.name)
+        VStack {
+            Image(systemName: "photo")
+                .frame(width: 110, height: 120)
+                .overlay(
+                    Circle()
+                        .stroke(.black, lineWidth: 1)
+                )
+            
+            Text(pokemon.name.capitalized)
+        }
     }
 }
 
@@ -49,8 +59,11 @@ struct PokemonCardView: View {
 //}
 
 struct PokedexView_Previews: PreviewProvider {
+    static let store = PokemonStore()
+    
     static var previews: some View {
         PokedexView()
+            .environmentObject(store)
     }
 }
 
@@ -58,4 +71,5 @@ struct PokedexView_Previews: PreviewProvider {
  https://developer.apple.com/documentation/swiftui/adding-a-search-interface-to-your-app
  https://developer.apple.com/documentation/swiftui/performing-a-search-operation
  https://www.hackingwithswift.com/quick-start/swiftui/how-to-add-search-tokens-to-a-search-field
+ https://www.hackingwithswift.com/quick-start/swiftui/how-to-draw-a-border-around-a-view
  */
