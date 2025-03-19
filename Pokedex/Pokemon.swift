@@ -21,14 +21,14 @@ enum ElementType: String, CaseIterable {
     case ghost
 }
 
-public struct Pokemon: Identifiable {
-    public var id: Int
+struct Pokemon: Identifiable {
+    var id: Int
     var name: String
     var types: [ElementType]
     var isCaught: Bool = Bool.random() // TODO: remove random default value
 }
 
-public let pokemons: [Pokemon] = [
+let pokemons: [Pokemon] = [
     Pokemon(id: 1, name: "bulbasaur", types: [.grass, .poison]),
     Pokemon(id: 2, name: "ivysaur", types: [.grass, .poison]),
     Pokemon(id: 3, name: "venusaur", types: [.grass, .poison]),
