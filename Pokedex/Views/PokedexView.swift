@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct PokedexView : View {
+    @EnvironmentObject var store: PokemonStore
+    
     var body: some View {
         NavigationView {
             //        Text("Pokedex")
             ScrollView {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 100))]) {
-                    ForEach(pokemons) { pokemon in
+                    ForEach(store.pokemons) { pokemon in
                         NavigationLink {
                             PokemonDetailView(pokemon: pokemon)
                         } label: {

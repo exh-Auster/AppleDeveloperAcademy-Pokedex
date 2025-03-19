@@ -8,25 +8,32 @@
 import SwiftUI
 
 struct TypeData { // TODO: dict?
+    var store: PokemonStore // TODO: Environment?
+    
     let type: ElementType
     
     var total: Double {
-        Double(pokemons.count { pokemon in
+        Double(store.pokemons.count { pokemon in
             pokemon.types.contains(type)
         })
     }
     
     var caught: Double {
-        Double(pokemons.count { pokemon in
+        Double(store.pokemons.count { pokemon in
             pokemon.types.contains(type) && pokemon.isCaught
         })
     }
 }
 
 struct StatisticsView : View {
-    private var numberOfPokemon = Double(pokemons.count)
-    private var caughtCount = Double(pokemons.count(where: { $0.isCaught } ))
+    @EnvironmentObject var store: PokemonStore
     
+    private var numberOfPokemon: Double { Double(store.pokemons.count)
+    }
+    
+    private var caughtCount: Double {
+        Double(store.pokemons.count(where: { $0.isCaught } ))
+    }
     
     var body: some View {
         List {
@@ -46,7 +53,7 @@ struct StatisticsView : View {
             
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))]) { // TODO: check
                 ForEach(ElementType.allCases, id: \.self) { type in
-                    let data = TypeData(type: type)
+                    let data = TypeData(store: store, type: type)
                     
                     Gauge(value: data.caught, in: 0...data.total) {
                         Text(type.rawValue.capitalized)

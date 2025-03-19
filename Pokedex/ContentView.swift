@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject var store = PokemonStore()
+    
     var body: some View {
 //        TabView {
 //            Tab("Pokedex", systemImage : "magazine") {
@@ -17,7 +19,6 @@ struct ContentView: View {
 //                StatisticsView()
 //            }
 //        }
-        
         
         TabView {
             PokedexView()
@@ -30,6 +31,7 @@ struct ContentView: View {
                     Label("Estatísticas", systemImage: "chart.xyaxis.line")
                 }
         }
+        .environmentObject(store)
     }
 }
 

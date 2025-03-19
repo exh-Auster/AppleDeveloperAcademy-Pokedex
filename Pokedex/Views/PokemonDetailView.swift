@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct PokemonDetailView: View {
+    @EnvironmentObject var store: PokemonStore
     @State var pokemon: Pokemon
     
     var body: some View {
@@ -21,7 +22,7 @@ struct PokemonDetailView: View {
                 Text(pokemon.name.capitalized)
                     .font(.title)
                 
-                Text(pokemons.count(where: { $0.isCaught }), format: .number)
+                Text(store.pokemons.count(where: { $0.isCaught }), format: .number)
                 
                 HStack {
                     ForEach(pokemon.types, id: \.self) { type in
@@ -36,17 +37,18 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
             }
             .navigationTitle(pokemon.name)
             .navigationBarTitleDisplayMode(.inline)
-//            .toolbar {
-//                var isCaught = pokemon.isCaught
-//                
-//                Button(isCaught ? "Remove" : "Add", systemImage: isCaught ? "minus" : "plus") {
-//                    pokemon.isCaught.toggle()
-//                }
-//            }
+            .toolbar {
+                let isCaught = pokemon.isCaught
+                
+                Button(isCaught ? "Remove" : "Add", systemImage: isCaught ? "minus" : "plus") {
+                    pokemon.isCaught.toggle() // FIXME: remove
+                    store.toggleCaughtStatus(for: pokemon)
+                }
+            }
         }
     }
 }
 
-#Preview {
-    PokemonDetailView(pokemon: pokemons.randomElement()!)
-}
+//#Preview {
+//    PokemonDetailView(pokemon: store.pokemons.randomElement()!)
+//}
