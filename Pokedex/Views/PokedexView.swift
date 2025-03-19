@@ -10,9 +10,18 @@ import SwiftUI
 struct PokedexView : View {
     
     var body: some View {
-        //        Text("Pokedex")
-        ForEach(pokemons) { pokemon in
-            PokemonCardView(pokemon: pokemon)
+        NavigationView {
+            //        Text("Pokedex")
+            VStack {
+                ForEach(pokemons) { pokemon in
+                    NavigationLink {
+                        Text("Placeholder: \(pokemon.id)")
+                    } label: {
+                        PokemonCardView(pokemon: pokemon)
+                    }
+                }
+            }
+            .navigationTitle("Pokedex")
         }
     }
 }
