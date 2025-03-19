@@ -54,18 +54,7 @@ struct PokemonCardView: View {
     
     var body: some View {
         VStack {
-            Image(systemName: "photo")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 50, height: 50)
-                .clipShape(.rect)
-                .frame(width: 110, height: 120)
-                .overlay(
-                    Circle()
-                    //                        .stroke(.black, lineWidth: 1)
-                    //                        .stroke(pokemon.types.first!.associatedColor, lineWidth: 1)
-                        .stroke(color, lineWidth: 2)
-                )
+            PokemonImageView(pokemon: pokemon, outerWidth: 100)
             
             Text(pokemon.name.capitalized)
         }
