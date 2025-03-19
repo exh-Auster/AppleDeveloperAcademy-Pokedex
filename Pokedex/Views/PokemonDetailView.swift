@@ -14,13 +14,8 @@ struct PokemonDetailView: View {
     var body: some View {
         ScrollView {
             VStack {
-                Image(systemName: "lizard")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(maxWidth: 200)
-                
-                Text(pokemon.name.capitalized)
-                    .font(.title)
+                PokemonImageView(pokemon: pokemon, outerWidth: 250)
+                    .padding()
                 
                 HStack {
                     ForEach(pokemon.types, id: \.self) { type in
@@ -43,10 +38,11 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
                     store.toggleCaughtStatus(for: pokemon)
                 }
             }
+            .padding()
         }
     }
 }
 
 //#Preview {
-//    PokemonDetailView(pokemon: store.pokemons.randomElement()!)
+//    PokemonDetailView()
 //}
