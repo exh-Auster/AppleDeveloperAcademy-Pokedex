@@ -22,8 +22,6 @@ struct PokemonDetailView: View {
                 Text(pokemon.name.capitalized)
                     .font(.title)
                 
-                Text(store.pokemons.count(where: { $0.isCaught }), format: .number)
-                
                 HStack {
                     ForEach(pokemon.types, id: \.self) { type in
                         Text(type.rawValue.capitalized) // TODO: full caps; capsule
