@@ -36,6 +36,12 @@ struct PokemonCardView: View {
     }
 }
 
-#Preview {
-    PokedexView()
+//#Preview {
+//    PokedexView()
+//}
+
+struct PokedexView_Previews: PreviewProvider {
+    static var previews: some View {
+        PokedexView()
+    }
 }

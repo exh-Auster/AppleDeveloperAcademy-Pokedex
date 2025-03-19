@@ -61,8 +61,14 @@ struct StatisticsView : View {
     }
 }
 
-#Preview {
-    StatisticsView()
+//#Preview {
+//    StatisticsView()
+//}
+
+struct StatisticsView_Previews: PreviewProvider {
+    static var previews: some View {
+        StatisticsView()
+    }
 }
 
 /*
