@@ -44,19 +44,24 @@ struct StatisticsView : View {
                 Text(numberOfPokemon, format: .number)
             }
             
-            ForEach(ElementType.allCases, id: \.self) { type in
-                let data = TypeData(type: type)
-                
-                Gauge(value: data.caught, in: 0...data.total) {
-                    Text(type.rawValue.capitalized)
-                } currentValueLabel: {
-                    Text(data.caught, format: .number)
-                } minimumValueLabel: {
-                    Text(0, format: .number)
-                } maximumValueLabel: {
-                    Text(data.total, format: .number)
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))]) { // TODO: check
+                ForEach(ElementType.allCases, id: \.self) { type in
+                    let data = TypeData(type: type)
+                    
+                    Gauge(value: data.caught, in: 0...data.total) {
+                        Text(type.rawValue.capitalized)
+                    } currentValueLabel: {
+                        Text(data.caught, format: .number)
+//                    } minimumValueLabel: {
+////                        Text(0, format: .number)
+//                        Text("") // TODO: check
+//                    } maximumValueLabel: {
+//                        Text(data.total, format: .number)
+                    }
+                    .tint(type.associatedColor)
+                    .gaugeStyle(.accessoryLinearCapacity)
                 }
-                .tint(type.associatedColor)
+                .padding(.vertical, 5)
             }
         }
     }
