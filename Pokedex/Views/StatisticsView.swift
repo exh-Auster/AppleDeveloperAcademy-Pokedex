@@ -9,7 +9,8 @@ import SwiftUI
 
 struct StatisticsView : View {
     var body : some View {
-        Text("Estatisticas")
+//        Text("Estatisticas")
+        Text("Caught: \(pokemons.count(where: { $0.isCaught }))")
     }
 }
 

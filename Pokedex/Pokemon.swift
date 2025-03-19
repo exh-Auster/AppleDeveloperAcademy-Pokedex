@@ -25,6 +25,7 @@ public struct Pokemon: Identifiable {
     public var id: Int
     var name: String
     var types: [ElementType]
+    var isCaught: Bool = Bool.random() // TODO: remove random default value
 }
 
 public let pokemons: [Pokemon] = [
