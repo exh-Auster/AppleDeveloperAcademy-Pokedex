@@ -46,13 +46,25 @@ struct PokedexView : View {
 struct PokemonCardView: View {
     let pokemon: Pokemon
     
+    var color: LinearGradient {
+        let colors = pokemon.types.map { $0.associatedColor }
+        
+        return LinearGradient(colors: colors, startPoint: .bottom, endPoint: .top)
+    }
+    
     var body: some View {
         VStack {
             Image(systemName: "photo")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 50, height: 50)
+                .clipShape(.rect)
                 .frame(width: 110, height: 120)
                 .overlay(
                     Circle()
-                        .stroke(.black, lineWidth: 1)
+                    //                        .stroke(.black, lineWidth: 1)
+                    //                        .stroke(pokemon.types.first!.associatedColor, lineWidth: 1)
+                        .stroke(color, lineWidth: 2)
                 )
             
             Text(pokemon.name.capitalized)
