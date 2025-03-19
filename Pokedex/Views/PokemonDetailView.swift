@@ -40,7 +40,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
             .toolbar {
                 let isCaught = pokemon.isCaught
                 
-                Button(isCaught ? "Remove" : "Add", systemImage: isCaught ? "minus" : "plus") {
+                Button(isCaught ? "Remove" : "Add", systemImage: isCaught ? "checkmark.circle.fill" : "plus.circle") {
                     pokemon.isCaught.toggle() // FIXME: remove
                     store.toggleCaughtStatus(for: pokemon)
                 }
