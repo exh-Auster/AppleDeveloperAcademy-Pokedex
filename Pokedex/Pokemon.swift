@@ -2,7 +2,7 @@
 
 import SwiftUICore
 
-enum ElementType: String, CaseIterable {
+enum ElementType: String, CaseIterable, Identifiable {
     case grass
     case poison
     case fire
@@ -21,6 +21,8 @@ enum ElementType: String, CaseIterable {
     case steel
     case fighting
     case ghost
+    
+    var id: Self { self }
     
     var associatedColor: Color { // TODO: check
         switch self {
@@ -54,6 +56,8 @@ struct Pokemon: Identifiable {
 }
 
 class PokemonStore: ObservableObject {
+    @Published var tokens: [ElementType] = []
+    
     @Published var pokemons: [Pokemon] = [
         Pokemon(id: 1, name: "bulbasaur", types: [.grass, .poison]),
         Pokemon(id: 2, name: "ivysaur", types: [.grass, .poison]),
@@ -211,6 +215,23 @@ class PokemonStore: ObservableObject {
     func toggleCaughtStatus(for pokemon: Pokemon) {
         if let index = pokemons.firstIndex(where: { $0.id == pokemon.id }) {
             pokemons[index].isCaught.toggle()
+        }
+    }
+    
+    func filteredPokemon(
+        pokemons: [Pokemon],
+        searchText: String,
+        tokens: [ElementType]
+    ) -> [Pokemon] {
+        print(tokens)
+        guard !searchText.isEmpty || !tokens.isEmpty else { return pokemons }
+        return pokemons.filter { pokemon in
+            if !searchText.isEmpty { // TODO: improve logic
+                pokemon.name.lowercased().contains(searchText.lowercased()) &&
+                tokens.allSatisfy(pokemon.types.contains)
+            } else {
+                tokens.allSatisfy(pokemon.types.contains)
+            }
         }
     }
 }

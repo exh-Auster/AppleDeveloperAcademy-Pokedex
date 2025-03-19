@@ -10,12 +10,15 @@ import SwiftUI
 struct PokedexView : View {
     @EnvironmentObject var store: PokemonStore
     
+    @State private var searchText: String = ""
+//    @State private var searchTokens: [ElementType] = []
+    
     var body: some View {
         NavigationView {
             //        Text("Pokedex")
             ScrollView {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 100))]) {
-                    ForEach(store.pokemons) { pokemon in
+                    ForEach(store.filteredPokemon(pokemons: store.pokemons, searchText: searchText, tokens: store.tokens)) { pokemon in
                         NavigationLink {
                             PokemonDetailView(pokemon: pokemon)
                         } label: {
@@ -26,6 +29,9 @@ struct PokedexView : View {
                 //            .edgesIgnoringSafeArea(.horizontal)
             }
             .navigationTitle("Pokedex")
+            .searchable(text: $searchText, tokens: $store.tokens, suggestedTokens: .constant(ElementType.allCases), token: { token in
+                Text(token.rawValue)
+            })
         }
     }
 }
