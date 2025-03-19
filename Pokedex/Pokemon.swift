@@ -1,6 +1,6 @@
 // By: Deepseek
 
-enum ElementType: String {
+enum ElementType: String, CaseIterable {
     case grass
     case poison
     case fire
