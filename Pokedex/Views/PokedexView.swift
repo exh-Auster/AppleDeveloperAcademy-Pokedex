@@ -15,7 +15,7 @@ struct PokedexView : View {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 100))]) {
                     ForEach(pokemons) { pokemon in
                         NavigationLink {
-                            Text("Placeholder: \(pokemon.id)")
+                            PokemonDetailView(pokemon: pokemon)
                         } label: {
                             PokemonCardView(pokemon: pokemon)
                         }
