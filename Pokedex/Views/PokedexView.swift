@@ -11,6 +11,7 @@ struct PokedexView : View {
     @EnvironmentObject var store: PokemonStore
     
     @State private var searchText: String = ""
+    @State private var filter: Bool = false
 //    @State private var searchTokens: [ElementType] = []
     
     var body: some View {
@@ -18,7 +19,7 @@ struct PokedexView : View {
             //        Text("Pokedex")
             ScrollView {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 100))]) {
-                    ForEach(store.filteredPokemon(pokemons: store.pokemons, searchText: searchText, tokens: store.tokens)) { pokemon in
+                    ForEach(store.filteredPokemon(pokemons: store.pokemons, searchText: searchText, tokens: store.tokens, caughtOnly: filter)) { pokemon in
                         NavigationLink {
                             PokemonDetailView(pokemon: pokemon)
                         } label: {
@@ -33,6 +34,11 @@ struct PokedexView : View {
             .searchable(text: $searchText, tokens: $store.tokens, suggestedTokens: .constant(ElementType.allCases), token: { token in
                 Text(token.rawValue)
             })
+            .toolbar {
+                Button("Filter caught only", systemImage: filter ? "line.3.horizontal.decrease.circle.fill" : "line.3.horizontal.decrease.circle") {
+                    filter.toggle()
+                }
+            }
         }
     }
 }

@@ -221,10 +221,14 @@ class PokemonStore: ObservableObject {
     func filteredPokemon(
         pokemons: [Pokemon],
         searchText: String,
-        tokens: [ElementType]
+        tokens: [ElementType],
+        caughtOnly: Bool = false
     ) -> [Pokemon] {
         print(tokens)
-        guard !searchText.isEmpty || !tokens.isEmpty else { return pokemons }
+        guard !searchText.isEmpty || !tokens.isEmpty else {
+            return caughtOnly ? pokemons.filter { $0.isCaught } : pokemons
+        }
+        
         return pokemons.filter { pokemon in
             if !searchText.isEmpty { // TODO: improve logic
                 pokemon.name.lowercased().contains(searchText.lowercased()) &&
