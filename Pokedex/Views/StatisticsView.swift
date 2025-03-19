@@ -36,40 +36,43 @@ struct StatisticsView : View {
     }
     
     var body: some View {
-        List {
-            //            TODO: Gauge labels - string interpolation vs. format:?
-            Gauge(value: caughtCount, in: 0...numberOfPokemon) {
-                Text("Total")
-            } currentValueLabel: {
-                //            Text("\(Int(caughtCount))")
-                Text(caughtCount, format: .number)
-            } minimumValueLabel: {
-                //            Text("\(Int(0))")
-                Text(0, format: .number)
-            } maximumValueLabel: {
-                //            Text("\(Int(numberOfPokemon))")
-                Text(numberOfPokemon, format: .number)
-            }
-            
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))]) { // TODO: check
-                ForEach(ElementType.allCases, id: \.self) { type in
-                    let data = TypeData(store: store, type: type)
-                    
-                    Gauge(value: data.caught, in: 0...data.total) {
-                        Text(type.rawValue.capitalized)
-                    } currentValueLabel: {
-                        Text(data.caught, format: .number)
-//                    } minimumValueLabel: {
-////                        Text(0, format: .number)
-//                        Text("") // TODO: check
-//                    } maximumValueLabel: {
-//                        Text(data.total, format: .number)
-                    }
-                    .tint(type.associatedColor)
-                    .gaugeStyle(.accessoryLinearCapacity)
+        NavigationView {
+            List {
+                //            TODO: Gauge labels - string interpolation vs. format:?
+                Gauge(value: caughtCount, in: 0...numberOfPokemon) {
+                    Text("Total")
+                } currentValueLabel: {
+                    //            Text("\(Int(caughtCount))")
+                    Text(caughtCount, format: .number)
+                } minimumValueLabel: {
+                    //            Text("\(Int(0))")
+                    Text(0, format: .number)
+                } maximumValueLabel: {
+                    //            Text("\(Int(numberOfPokemon))")
+                    Text(numberOfPokemon, format: .number)
                 }
-                .padding(.vertical, 5)
+                
+                LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))]) { // TODO: check
+                    ForEach(ElementType.allCases, id: \.self) { type in
+                        let data = TypeData(store: store, type: type)
+                        
+                        Gauge(value: data.caught, in: 0...data.total) {
+                            Text(type.rawValue.capitalized)
+                        } currentValueLabel: {
+                            Text(data.caught, format: .number)
+                            //                    } minimumValueLabel: {
+                            ////                        Text(0, format: .number)
+                            //                        Text("") // TODO: check
+                            //                    } maximumValueLabel: {
+                            //                        Text(data.total, format: .number)
+                        }
+                        .tint(type.associatedColor)
+                        .gaugeStyle(.accessoryLinearCapacity)
+                    }
+                    .padding(.vertical, 5)
+                }
             }
+            .navigationTitle("Stats")
         }
     }
 }
