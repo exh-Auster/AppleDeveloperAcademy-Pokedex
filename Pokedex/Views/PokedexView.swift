@@ -53,3 +53,9 @@ struct PokedexView_Previews: PreviewProvider {
         PokedexView()
     }
 }
+
+/*
+ https://developer.apple.com/documentation/swiftui/adding-a-search-interface-to-your-app
+ https://developer.apple.com/documentation/swiftui/performing-a-search-operation
+ https://www.hackingwithswift.com/quick-start/swiftui/how-to-add-search-tokens-to-a-search-field
+ */
