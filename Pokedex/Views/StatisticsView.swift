@@ -56,6 +56,7 @@ struct StatisticsView : View {
                 } maximumValueLabel: {
                     Text(data.total, format: .number)
                 }
+                .tint(type.associatedColor)
             }
         }
     }
@@ -77,4 +78,6 @@ struct StatisticsView_Previews: PreviewProvider {
  
  https://www.hackingwithswift.com/read/0/5/string-interpolation
  https://developer.apple.com/documentation/swiftui/text/init(_:format:)
+ 
+ https://stackoverflow.com/questions/27706832/can-swift-enums-have-multiple-raw-values
  */

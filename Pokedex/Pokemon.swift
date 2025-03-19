@@ -1,5 +1,7 @@
 // By: Deepseek
 
+import SwiftUICore
+
 enum ElementType: String, CaseIterable {
     case grass
     case poison
@@ -19,6 +21,29 @@ enum ElementType: String, CaseIterable {
     case steel
     case fighting
     case ghost
+    
+    var associatedColor: Color { // TODO: check
+        switch self {
+        case .grass: return Color.green
+        case .poison: return Color.purple
+        case .fire: return Color.red
+        case .flying: return Color.blue
+        case .water: return Color.blue
+        case .bug: return Color.green
+        case .normal: return Color.gray
+        case .electric: return Color.yellow
+        case .ground: return Color.brown
+        case .fairy: return Color.pink
+        case .psychic: return Color.purple
+        case .rock: return Color.brown
+        case .ice: return Color.cyan
+        case .dragon: return Color.blue
+        case .dark: return Color.black
+        case .steel: return Color.gray
+        case .fighting: return Color.red
+        case .ghost: return Color.purple
+        }
+    }
 }
 
 struct Pokemon: Identifiable {
