@@ -19,7 +19,7 @@ struct PokemonDetailView: View {
                 
                 HStack {
                     ForEach(pokemon.types, id: \.self) { type in
-                        Text(type.rawValue.capitalized) // TODO: full caps; capsule
+                        PokemonTypeCard(type: type)
                     }
                 }
                 
@@ -40,6 +40,37 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
             }
             .padding()
         }
+    }
+}
+
+struct PokemonTypeCard: View {
+    let type: ElementType
+
+    var body: some View {
+        Text(type.rawValue.uppercased())
+            .font(.caption)
+            .fontWeight(.bold)
+            .foregroundColor(.white)
+            .padding(.horizontal, 12)
+            .padding(.vertical, 6)
+            .background(
+                Capsule()
+                    .fill(type.associatedColor.gradient)
+            )
+            .overlay(
+                Capsule()
+                    .stroke(type.associatedColor)
+            )
+            .padding(2)
+    }
+}
+
+struct PokemonDetailView_Previews: PreviewProvider {
+    static let store = PokemonStore()
+    
+    static var previews: some View {
+        PokemonDetailView(pokemon: store.pokemons.first!)
+            .environmentObject(store)
     }
 }
 
