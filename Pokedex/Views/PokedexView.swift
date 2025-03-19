@@ -8,16 +8,20 @@
 import SwiftUI
 
 struct PokedexView : View {
-
-    var body : some View {
-//        Text("Pokedex")
+    
+    var body: some View {
+        //        Text("Pokedex")
         ForEach(pokemons) { pokemon in
-            VStack {
-                Text(pokemon.name)
-                Text(pokemon.types.count, format: .number)
-                
-            }
+            PokemonCardView(pokemon: pokemon)
         }
+    }
+}
+
+struct PokemonCardView: View {
+    let pokemon: Pokemon
+    
+    var body: some View {
+        Text(pokemon.name)
     }
 }
 
