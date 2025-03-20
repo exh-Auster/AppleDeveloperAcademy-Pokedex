@@ -48,6 +48,23 @@ enum ElementType: String, CaseIterable, Identifiable {
     }
 }
 
+enum User: String {
+    case ash
+    case diego
+    case juliana
+    
+    var presetCaughtPokemons: [Int] {
+        switch self {
+        case .ash:
+            return [25, 1, 4, 7, 16, 131, 143]
+        case.diego:
+            return [3, 6, 9, 31, 34, 57, 59, 65, 94, 106, 107, 126, 149, 151] // 94 FAV
+        case .juliana:
+            return [1, 4, 7, 12, 25, 39, 54, 77, 143] // 1, 54 FAV
+        }
+    }
+}
+
 struct Pokemon: Identifiable {
     var id: Int
     var name: String
@@ -64,7 +81,27 @@ struct Pokemon: Identifiable {
 class PokemonStore: ObservableObject {
     @Published var tokens: [ElementType] = []
     
-    @Published var pokemons: [Pokemon] = pokemonRawData
+    @Published var pokemons: [Pokemon] = []
+    
+    let user: User
+    
+    init(user: User) {
+        self.user = user
+        self.pokemons = Self.loadPokemons(for: user)
+    }
+    
+    static private func loadPokemons(for user: User) -> [Pokemon] {
+        let allPokemons = pokemonRawData
+        let caughtPokemonIds = user.presetCaughtPokemons
+
+        return allPokemons.map { pokemon in
+            var modifiedPokemon = pokemon
+            
+            modifiedPokemon.isCaught = caughtPokemonIds.contains(pokemon.id)
+            return modifiedPokemon
+        }
+    }
+    
     
     func toggleCaughtStatus(for pokemon: Pokemon) {
         if let index = pokemons.firstIndex(where: { $0.id == pokemon.id }) {
