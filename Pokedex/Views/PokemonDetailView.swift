@@ -41,7 +41,7 @@ struct PokemonDetailView: View {
                                 Text("Strong against".uppercased())
                                 ForEach(pokemon.types, id: \.self) { type in
                                     ForEach(type.associatedStrengths, id: \.self) { strength in
-                                        PokemonTypeCard(type: strength)
+                                        PokemonTypeCard(type: strength, withFixedWidth: true)
                                     }
                                 }
                                 
@@ -55,7 +55,7 @@ struct PokemonDetailView: View {
                                 Text("Weak against".uppercased())
                                 ForEach(pokemon.types, id: \.self) { type in
                                     ForEach(type.associatedWeaknesses, id: \.self) { weakness in
-                                        PokemonTypeCard(type: weakness)
+                                        PokemonTypeCard(type: weakness, withFixedWidth: true)
                                     }
                                 }
                                 
@@ -91,6 +91,7 @@ struct PokemonDetailView: View {
 
 struct PokemonTypeCard: View {
     let type: ElementType
+    var withFixedWidth: Bool = false
 
     var body: some View {
         Text(type.rawValue.uppercased())
@@ -99,6 +100,7 @@ struct PokemonTypeCard: View {
             .foregroundColor(.white)
             .padding(.horizontal, 12)
             .padding(.vertical, 6)
+            .frame(width: withFixedWidth ? 100 : nil)
             .background(
                 Capsule()
                     .fill(type.associatedColor.gradient)
