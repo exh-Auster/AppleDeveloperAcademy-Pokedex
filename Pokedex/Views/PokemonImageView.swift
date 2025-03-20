@@ -34,5 +34,15 @@ struct PokemonImageView: View {
 }
 
 //#Preview {
-//    PokemonImageView()
+//    let pokemon = Pokemon(id: 0, name: "Test", types: [.bug, .dark, .dragon, .fighting])
+//    
+//    PokemonImageView(pokemon: pokemon, outerWidth: 300)
 //}
+
+struct PokemonImageView_Previews: PreviewProvider {
+    static let pokemon = Pokemon(id: 0, name: "Test", types: [.bug, .dark, .dragon, .fighting])
+    
+    static var previews: some View {
+        PokemonImageView(pokemon: pokemon, outerWidth: 300)
+    }
+}

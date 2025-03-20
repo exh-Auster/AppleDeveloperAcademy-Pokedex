@@ -65,6 +65,10 @@ struct PokemonTypeCard: View {
     }
 }
 
+//#Preview {
+//    PokemonDetailView()
+//}
+
 struct PokemonDetailView_Previews: PreviewProvider {
     static let store = PokemonStore()
     
@@ -73,7 +77,3 @@ struct PokemonDetailView_Previews: PreviewProvider {
             .environmentObject(store)
     }
 }
-
-//#Preview {
-//    PokemonDetailView()
-//}
