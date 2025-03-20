@@ -28,14 +28,37 @@ struct PokedexView : View {
                 }
                 .padding()
                 //            .edgesIgnoringSafeArea(.horizontal)
-            }
-            .navigationTitle("Pokedex")
-            .searchable(text: $searchText, tokens: $store.tokens, suggestedTokens: .constant(ElementType.allCases), token: { token in
-                Text(token.rawValue)
-            })
-            .toolbar {
-                Button("Filter caught only", systemImage: filter ? "line.3.horizontal.decrease.circle.fill" : "line.3.horizontal.decrease.circle") {
-                    filter.toggle()
+                .navigationTitle("Pokedex")
+                .searchable(text: $searchText, tokens: $store.tokens, suggestedTokens: .constant(ElementType.allCases), token: { token in
+                    Text(token.rawValue)
+                })
+                .toolbar {
+                    ToolbarItem(placement: .principal) {
+                        Picker("Filtro", selection: $filter) {
+                            Text("Caught").tag(true)
+                            Text("All").tag(false)
+                        }
+                        .pickerStyle(.segmented)
+                        .frame(maxWidth: 150)
+                    }
+                    
+//                    ToolbarItem {
+//                        Button("Filter caught only", systemImage: filter ? "line.3.horizontal.decrease.circle.fill" : "line.3.horizontal.decrease.circle") {
+//                            filter.toggle()
+//                        }
+//                    }
+                    
+                    ToolbarItem {
+                        Menu {
+                            ForEach(User.allCases, id: \.self) { user in
+                                Button(user.rawValue.capitalized) {
+                                    store.selectedUser = user
+                                }
+                            }
+                        } label: {
+                            UserImageView(selectedUser: store.selectedUser)
+                        }
+                    }
                 }
             }
         }
@@ -82,4 +105,5 @@ struct PokedexView_Previews: PreviewProvider {
  https://developer.apple.com/documentation/swiftui/performing-a-search-operation
  https://www.hackingwithswift.com/quick-start/swiftui/how-to-add-search-tokens-to-a-search-field
  https://www.hackingwithswift.com/quick-start/swiftui/how-to-draw-a-border-around-a-view
+ https://developer.apple.com/design/human-interface-guidelines/segmented-controls
  */
