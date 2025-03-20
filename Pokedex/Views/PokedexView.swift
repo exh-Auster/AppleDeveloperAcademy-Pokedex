@@ -11,14 +11,14 @@ struct PokedexView : View {
     @EnvironmentObject var store: PokemonStore
     
     @State private var searchText: String = ""
-    @State private var filter: Bool = true
+    @State private var filter: FilterOptions = .caught
     
     var body: some View {
         NavigationView {
             //        Text("Pokedex")
             ScrollView {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 100))]) {
-                    ForEach(store.filteredPokemon(pokemons: store.pokemons, searchText: searchText, tokens: store.tokens, caughtOnly: filter)) { pokemon in
+                    ForEach(store.filteredPokemon(pokemons: store.pokemons, searchText: searchText, tokens: store.tokens, filter: filter)) { pokemon in
                         NavigationLink {
                             PokemonDetailView(pokemon: pokemon)
                         } label: {
@@ -35,11 +35,12 @@ struct PokedexView : View {
                 .toolbar {
                     ToolbarItem(placement: .principal) {
                         Picker("Filtro", selection: $filter) {
-                            Text("Caught").tag(true)
-                            Text("All").tag(false)
+                            Text("Caught").tag(FilterOptions.caught)
+                            Text("Uncaught").tag(FilterOptions.uncaught)
+                            Text("All").tag(FilterOptions.all)
                         }
                         .pickerStyle(.segmented)
-                        .frame(maxWidth: 150)
+                        .frame(maxWidth: 230)
                     }
                     
 //                    ToolbarItem {

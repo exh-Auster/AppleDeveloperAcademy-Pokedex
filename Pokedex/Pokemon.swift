@@ -113,6 +113,12 @@ enum User: String, CaseIterable, Identifiable {
     }
 }
 
+enum FilterOptions {
+    case all
+    case caught
+    case uncaught
+}
+
 struct Pokemon: Identifiable {
     var id: Int
     var name: String
@@ -157,20 +163,31 @@ class PokemonStore: ObservableObject {
         pokemons: [Pokemon],
         searchText: String,
         tokens: [ElementType],
-        caughtOnly: Bool = false
+        filter: FilterOptions = .all
     ) -> [Pokemon] {
         print(tokens)
         guard !searchText.isEmpty || !tokens.isEmpty else {
-            return caughtOnly ? pokemons.filter { $0.isCaught } : pokemons
+            return pokemons.filter { pokemon in
+                switch filter {
+                case .all: return true
+                case .caught: return pokemon.isCaught
+                case .uncaught: return !pokemon.isCaught
+                }
+            }
         }
         
         return pokemons.filter { pokemon in
-            if !searchText.isEmpty { // TODO: improve logic
-                pokemon.name.lowercased().contains(searchText.lowercased()) &&
-                tokens.allSatisfy(pokemon.types.contains)
-            } else {
-                tokens.allSatisfy(pokemon.types.contains)
-            }
+            let matchesSearch = searchText.isEmpty || pokemon.name.lowercased().contains(searchText.lowercased())
+            let matchesTokens = tokens.isEmpty || tokens.allSatisfy(pokemon.types.contains)
+            let matchesFilter: Bool = {
+                switch filter {
+                case .all: return true
+                case .caught: return pokemon.isCaught
+                case .uncaught: return !pokemon.isCaught
+                }
+            }()
+            
+            return matchesSearch && matchesTokens && matchesFilter
         }
     }
 }
