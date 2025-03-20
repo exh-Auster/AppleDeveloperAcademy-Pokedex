@@ -18,17 +18,17 @@ struct PokemonImageView: View {
     }
     
     var body: some View {
-        (UIImage(named: pokemon.id.description) != nil ? Image(pokemon.id.description) : Image(systemName: "photo")) // TODO: check
+        (UIImage(named: String(pokemon.id.description)) != nil ? Image(pokemon.id.description) : Image(systemName: "photo")) // TODO: check
             .resizable()
             .scaledToFit()
-            .frame(width: outerWidth / 2.5, height: outerWidth / 2.5)
+            .frame(width: outerWidth * 0.7, height: outerWidth / 0.7)
             .clipShape(.rect)
             .frame(width: outerWidth, height: outerWidth)
             .overlay(
                 Circle()
                 //                        .stroke(.black, lineWidth: 1)
                 //                        .stroke(pokemon.types.first!.associatedColor, lineWidth: 1)
-                    .stroke(color, lineWidth: outerWidth / 50)
+                    .stroke(color, lineWidth: outerWidth / 30)
             )
     }
 }
@@ -40,9 +40,7 @@ struct PokemonImageView: View {
 //}
 
 struct PokemonImageView_Previews: PreviewProvider {
-    static let pokemon = Pokemon(id: 0, name: "Test", types: [.bug, .dark, .dragon, .fighting])
-    
     static var previews: some View {
-        PokemonImageView(pokemon: pokemon, outerWidth: 300)
+        PokemonImageView(pokemon: pokemonRawData[0], outerWidth: 300)
     }
 }
