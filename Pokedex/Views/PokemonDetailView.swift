@@ -38,7 +38,8 @@ struct PokemonDetailView: View {
                     HStack {
                         if !pokemon.types.flatMap({ $0.associatedStrengths }).isEmpty {
                             VStack {
-                                Text("Strong against".uppercased())
+                                Text("Strong against")
+                                    .font(.title2)
                                 ForEach(pokemon.types, id: \.self) { type in
                                     ForEach(type.associatedStrengths, id: \.self) { strength in
                                         PokemonTypeCard(type: strength, withFixedWidth: true)
@@ -52,7 +53,8 @@ struct PokemonDetailView: View {
                         
                         if !pokemon.types.flatMap({ $0.associatedWeaknesses }).isEmpty {
                             VStack {
-                                Text("Weak against".uppercased())
+                                Text("Weak against")
+                                    .font(.title2)
                                 ForEach(pokemon.types, id: \.self) { type in
                                     ForEach(type.associatedWeaknesses, id: \.self) { weakness in
                                         PokemonTypeCard(type: weakness, withFixedWidth: true)
@@ -67,10 +69,10 @@ struct PokemonDetailView: View {
                     .font(.headline)
                 }
                 
-                Divider()
-                    .padding()
-                
                 if !pokemon.evolutions.isEmpty {
+                    Divider()
+                        .padding()
+                    
                     EvolutionView(pokemon: pokemon)
                 }
             }
