@@ -11,27 +11,28 @@ struct EvolutionView: View {
     var pokemon: Pokemon
     
     var body: some View {
-        Text("Evolutions") // FIXME: alignment
-            .font(.title)
-        
-        ScrollView {
+        VStack(alignment: .leading) {
+            Text("Evolutions") // FIXME: alignment
+                .font(.title2)
+                .padding(.horizontal)
             
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: 100))]) {
-                ForEach(pokemon.evolutions) { pokemon in
-                    NavigationLink {
-                        PokemonDetailView(pokemon: pokemon)
-                    } label: {
-                        PokemonCardView(pokemon: pokemon)
+            ScrollView(.horizontal) {
+                HStack {
+                    ForEach(pokemon.evolutions) { pokemon in
+                        NavigationLink {
+                            PokemonDetailView(pokemon: pokemon)
+                        } label: {
+                            PokemonCardView(pokemon: pokemon)
+                        }
                     }
+                    .padding(.horizontal, 10)
                 }
+                .padding()
             }
-            .padding()
-            //            .edgesIgnoringSafeArea(.horizontal)
         }
-        //    }
     }
 }
 
 #Preview {
-    EvolutionView(pokemon: pokemonRawData[0])
+    EvolutionView(pokemon: pokemonRawData[132])
 }
