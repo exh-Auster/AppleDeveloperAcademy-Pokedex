@@ -30,6 +30,42 @@ struct PokemonDetailView: View {
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                     """)
                 .multilineTextAlignment(.center)
+
+                if !pokemon.types.flatMap({ $0.associatedStrengths + $0.associatedWeaknesses }).isEmpty {
+                    Divider()
+                        .padding()
+                    
+                    HStack {
+                        if !pokemon.types.flatMap({ $0.associatedStrengths }).isEmpty {
+                            VStack {
+                                Text("Strong against".uppercased())
+                                ForEach(pokemon.types, id: \.self) { type in
+                                    ForEach(type.associatedStrengths, id: \.self) { strength in
+                                        PokemonTypeCard(type: strength)
+                                    }
+                                }
+                                
+                                Spacer()
+                            }
+                            .frame(maxWidth: .infinity, alignment: .top)
+                        }
+                        
+                        if !pokemon.types.flatMap({ $0.associatedWeaknesses }).isEmpty {
+                            VStack {
+                                Text("Weak against".uppercased())
+                                ForEach(pokemon.types, id: \.self) { type in
+                                    ForEach(type.associatedWeaknesses, id: \.self) { weakness in
+                                        PokemonTypeCard(type: weakness)
+                                    }
+                                }
+                                
+                                Spacer()
+                            }
+                            .frame(maxWidth: .infinity, alignment: .top)
+                        }
+                    }
+                    .font(.headline)
+                }
                 
                 Divider()
                     .padding()

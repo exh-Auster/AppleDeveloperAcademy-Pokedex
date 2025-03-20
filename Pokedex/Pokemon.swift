@@ -46,6 +46,52 @@ enum ElementType: String, CaseIterable, Identifiable {
         case .ghost: return Color.purple
         }
     }
+    
+    var associatedWeaknesses: [ElementType] {
+        switch self {
+        case .grass: return [.fire, .ice, .poison, .flying, .bug]
+        case .poison: return [.ground, .psychic]
+        case .fire: return [.water, .ground, .rock]
+        case .flying: return [.electric, .ice, .rock]
+        case .water: return [.electric, .grass]
+        case .bug: return [.fire, .flying, .rock]
+        case .normal: return [.fighting]
+        case .electric: return [.ground]
+        case .ground: return [.water, .ice, .grass]
+        case .fairy: return [.steel, .poison]
+        case .psychic: return [.bug, .ghost, .dark]
+        case .rock: return [.water, .grass, .fighting, .ground, .steel]
+        case .ice: return [.fire, .fighting, .rock, .steel]
+        case .dragon: return [.ice, .dragon, .fairy]
+        case .dark: return [.fighting, .bug, .fairy]
+        case .steel: return [.fire, .fighting, .ground]
+        case .fighting: return [.flying, .psychic, .fairy]
+        case .ghost: return [.ghost, .dark]
+        }
+    }
+    
+    var associatedStrengths: [ElementType] {
+        switch self {
+        case .grass: return [.water, .ground, .rock]
+        case .poison: return [.grass, .fairy]
+        case .fire: return [.grass, .bug, .ice, .steel]
+        case .flying: return [.grass, .fighting, .bug]
+        case .water: return [.fire, .ground, .rock]
+        case .bug: return [.grass, .psychic, .dark]
+        case .normal: return []
+        case .electric: return [.water, .flying]
+        case .ground: return [.fire, .electric, .poison, .rock, .steel]
+        case .fairy: return [.fighting, .dragon, .dark]
+        case .psychic: return [.fighting, .poison]
+        case .rock: return [.fire, .ice, .flying, .bug]
+        case .ice: return [.grass, .ground, .flying, .dragon]
+        case .dragon: return [.dragon]
+        case .dark: return [.psychic, .ghost]
+        case .steel: return [.rock, .ice, .fairy]
+        case .fighting: return [.normal, .rock, .steel, .ice, .dark]
+        case .ghost: return [.psychic, .ghost]
+        }
+    }
 }
 
 enum User: String, CaseIterable, Identifiable {
