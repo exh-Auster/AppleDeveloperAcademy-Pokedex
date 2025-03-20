@@ -80,7 +80,7 @@ struct PokemonTypeCard: View {
 //}
 
 struct PokemonDetailView_Previews: PreviewProvider {
-    static let store = PokemonStore(user: .ash)
+    static let store = PokemonStore()
     
     static var previews: some View {
         PokemonDetailView(pokemon: store.pokemons.first!)

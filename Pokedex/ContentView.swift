@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject var store = PokemonStore(user: .ash)
+    @StateObject var store = PokemonStore()
     
     var body: some View {
 //        TabView {
