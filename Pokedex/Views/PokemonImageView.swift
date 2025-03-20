@@ -21,7 +21,7 @@ struct PokemonImageView: View {
         (UIImage(named: pokemon.id.description) != nil ? Image(pokemon.id.description) : Image(systemName: "photo")) // TODO: check
             .resizable()
             .scaledToFit()
-            .frame(width: outerWidth / 2, height: outerWidth / 2)
+            .frame(width: outerWidth / 2.5, height: outerWidth / 2.5)
             .clipShape(.rect)
             .frame(width: outerWidth, height: outerWidth)
             .overlay(

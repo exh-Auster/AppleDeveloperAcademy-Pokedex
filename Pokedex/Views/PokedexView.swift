@@ -56,7 +56,11 @@ struct PokemonCardView: View {
         VStack {
             PokemonImageView(pokemon: pokemon, outerWidth: 100)
             
+            Text("#\(pokemon.id)")
+                .font(.caption2)
+                .padding(.top, 1)
             Text(pokemon.name.capitalized)
+                .padding(.bottom)
         }
     }
 }
