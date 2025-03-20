@@ -11,8 +11,7 @@ struct PokedexView : View {
     @EnvironmentObject var store: PokemonStore
     
     @State private var searchText: String = ""
-    @State private var filter: Bool = false
-//    @State private var searchTokens: [ElementType] = []
+    @State private var filter: Bool = true
     
     var body: some View {
         NavigationView {
