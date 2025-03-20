@@ -18,7 +18,7 @@ struct PokemonImageView: View {
     }
     
     var body: some View {
-        Image(systemName: "photo")
+        (UIImage(named: pokemon.id.description) != nil ? Image(pokemon.id.description) : Image(systemName: "photo")) // TODO: check
             .resizable()
             .scaledToFit()
             .frame(width: outerWidth / 2, height: outerWidth / 2)
