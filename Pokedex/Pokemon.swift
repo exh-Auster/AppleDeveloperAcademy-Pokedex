@@ -122,6 +122,7 @@ enum FilterOptions {
 struct Pokemon: Identifiable {
     var id: Int
     var name: String
+    var description: String?
     var types: [ElementType]
     var isCaught: Bool = Bool.random() // TODO: remove random default value
     var evolutionIds: [Int] = []
