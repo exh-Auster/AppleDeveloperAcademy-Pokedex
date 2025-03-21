@@ -17,7 +17,7 @@ enum ElementType: String, CaseIterable, Identifiable {
     case rock
     case ice
     case dragon
-    case dark
+//    case dark
     case steel
     case fighting
     case ghost
@@ -40,7 +40,7 @@ enum ElementType: String, CaseIterable, Identifiable {
         case .rock: return Color.brown
         case .ice: return Color.cyan
         case .dragon: return Color.blue
-        case .dark: return Color.black
+//        case .dark: return Color.black
         case .steel: return Color.gray
         case .fighting: return Color.red
         case .ghost: return Color.purple
@@ -59,14 +59,16 @@ enum ElementType: String, CaseIterable, Identifiable {
         case .electric: return [.ground]
         case .ground: return [.water, .ice, .grass]
         case .fairy: return [.steel, .poison]
-        case .psychic: return [.bug, .ghost, .dark]
+//        case .psychic: return [.bug, .ghost, .dark]
+        case .psychic: return [.bug, .ghost]
         case .rock: return [.water, .grass, .fighting, .ground, .steel]
         case .ice: return [.fire, .fighting, .rock, .steel]
         case .dragon: return [.ice, .dragon, .fairy]
-        case .dark: return [.fighting, .bug, .fairy]
+//        case .dark: return [.fighting, .bug, .fairy]
         case .steel: return [.fire, .fighting, .ground]
         case .fighting: return [.flying, .psychic, .fairy]
-        case .ghost: return [.ghost, .dark]
+//        case .ghost: return [.ghost, .dark]
+        case .ghost: return [.ghost]
         }
     }
     
@@ -77,18 +79,22 @@ enum ElementType: String, CaseIterable, Identifiable {
         case .fire: return [.grass, .bug, .ice, .steel]
         case .flying: return [.grass, .fighting, .bug]
         case .water: return [.fire, .ground, .rock]
-        case .bug: return [.grass, .psychic, .dark]
+//        case .bug: return [.grass, .psychic, .dark]
+        case .bug: return [.grass, .psychic]
         case .normal: return []
         case .electric: return [.water, .flying]
         case .ground: return [.fire, .electric, .poison, .rock, .steel]
-        case .fairy: return [.fighting, .dragon, .dark]
+//        case .fairy: return [.fighting, .dragon, .dark]
+        case .fairy: return [.fighting, .dragon]
         case .psychic: return [.fighting, .poison]
         case .rock: return [.fire, .ice, .flying, .bug]
         case .ice: return [.grass, .ground, .flying, .dragon]
         case .dragon: return [.dragon]
-        case .dark: return [.psychic, .ghost]
+//        case .dark: return [.psychic, .ghost]
         case .steel: return [.rock, .ice, .fairy]
-        case .fighting: return [.normal, .rock, .steel, .ice, .dark]
+//        case .fighting: return [.normal, .rock, .steel, .ice, .dark]
+        case .fighting: return [.normal, .rock, .steel, .ice]
+
         case .ghost: return [.psychic, .ghost]
         }
     }
