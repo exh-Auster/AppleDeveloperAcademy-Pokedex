@@ -23,7 +23,7 @@ struct ContentView: View {
         TabView {
             PokedexView()
                 .tabItem {
-                    Label("Pokedex", systemImage: "magazine")
+                    Label("Pokédex", systemImage: "magazine")
                 }
             
             StatisticsView()

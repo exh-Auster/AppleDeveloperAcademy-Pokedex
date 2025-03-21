@@ -28,7 +28,7 @@ struct PokedexView : View {
                 }
                 .padding()
                 //            .edgesIgnoringSafeArea(.horizontal)
-                .navigationTitle("Pokedex")
+                .navigationTitle("Pokédex")
                 .searchable(text: $searchText, tokens: $store.tokens, suggestedTokens: .constant(ElementType.allCases), token: { token in
                     Text(token.rawValue)
                 })
