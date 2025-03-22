@@ -1,6 +1,6 @@
 ## Overview
 
-This app was developed in collaboration with [Juan Nacif](https://github.com/juannacif) and [Vinicius Marques](https://github.com/hyauss) as part of the **Apple Developer Academy / TIC em trilhas - Foundation iOS** course, a two-week in-person program focused on the basics of Swift, SwiftUI and Apple's Human Interface Guidelines.
+This app was developed in collaboration with [Juan Nacif](https://github.com/juannacif) and [Vinicius Marques](https://github.com/hyauss) as part of the **Apple Developer Academy | TIC em trilhas - Foundation iOS** course, a two-week in-person program focused on the basics of Swift, SwiftUI and Apple's Human Interface Guidelines.
 
 Below are some screenshots highlighting the app's UI and features:
 
